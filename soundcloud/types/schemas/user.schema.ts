@@ -1,0 +1,27 @@
+export type UserSchema = {
+  avatar_url: string;
+  city: string;
+  country: string;
+  description: string;
+  discogs_name: string;
+  first_name: string;
+  followers_count: number;
+  followings_count: number;
+  full_name: string;
+  urn: string;
+  kind: string;
+  created_at: string;
+  last_modified: string;
+  last_name: string;
+  permalink: string;
+  permalink_url: string;
+  plan: string;
+  playlist_count: number;
+  public_favorites_count: number;
+  reposts_count: number;
+  track_count: number;
+  uri: string;
+  username: string;
+  website: string;
+  website_title: string;
+};

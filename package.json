@@ -1,0 +1,13 @@
+{
+  "name": "soundcloudts",
+  "version": "1.0.0",
+  "description": "Soundcloudts is a library for accessing SoundCloud API written in pure Typescript",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.28.1",
+  "dependencies": {
+    "@types/node": "^25.2.3",
+    "typescript": "^5.9.3"
+  }
+}
