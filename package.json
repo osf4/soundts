@@ -1,6 +1,6 @@
 {
   "name": "soundts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "soundts is a library for accessing SoundCloud API written in pure Typescript",
   "keywords": [
