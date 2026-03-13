@@ -11,7 +11,7 @@
   "author": "osf4",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/osf4/soundts"
   },
   "license": "MIT",
   "packageManager": "pnpm@10.28.1",
