@@ -1,11 +1,11 @@
 # About
 
-**soundcloudts** is a small library for accessing SoundCloud API written in pure TypeScript and has **zero dependencies**.
+**soundts** is a small library for accessing SoundCloud API written in pure TypeScript and has **zero dependencies**.
 
 # Install
 
 ```ts
-npm install soundcloudts
+npm install soundts
 ```
 
 # Authorization
@@ -28,8 +28,7 @@ So, **Client ID** and **Client Secret** are your credentials for authorization.
 **Search for tracks, playlists, and users**
 
 ```ts
-import { SoundcloudCredentials } from "@/models";
-import { Soundcloud } from "@/soundcloud";
+import { Soundcloud, SoundcloudCredentials } from "soundts";
 
 async function bootstrap() {
   const sc = new Soundcloud({
@@ -72,8 +71,7 @@ bootstrap();
 **Get track, user or playlist by it's urn**
 
 ```ts
-import { SoundcloudCredentials } from "@/models";
-import { Soundcloud } from "@/soundcloud";
+import { Soundcloud, SoundcloudCredentials } from "soundts";
 
 async function bootstrap() {
   const sc = new Soundcloud({
@@ -100,9 +98,8 @@ bootstrap();
 **Get stream of track or download it**
 
 ```ts
-import { SoundcloudCredentials } from "@/models";
-import { Soundcloud } from "@/soundcloud";
 import { createWriteStream } from "fs";
+import { Soundcloud, SoundcloudCredentials } from "soundts";
 import { pipeline } from "stream/promises";
 
 async function bootstrap() {
@@ -132,9 +129,8 @@ bootstrap();
 **Save and load credentials**
 
 ```ts
-import { SoundcloudCredentials } from "@/models";
-import { Soundcloud } from "@/soundcloud";
 import { createReadStream } from "fs";
+import { Soundcloud, SoundcloudCredentials } from "soundts";
 
 async function bootstrap() {
   const sc = new Soundcloud({

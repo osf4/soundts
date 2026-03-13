@@ -1,13 +1,33 @@
 {
-  "name": "soundcloudts",
+  "name": "soundts",
   "version": "1.0.0",
-  "description": "Soundcloudts is a library for accessing SoundCloud API written in pure Typescript",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "type": "module",
+  "description": "soundts is a library for accessing SoundCloud API written in pure Typescript",
+  "keywords": [
+    "soundcloud",
+    "api",
+    "music"
+  ],
+  "author": "osf4",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
   "packageManager": "pnpm@10.28.1",
-  "dependencies": {
-    "@types/node": "^25.2.3",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
     "typescript": "^5.9.3"
   }
 }

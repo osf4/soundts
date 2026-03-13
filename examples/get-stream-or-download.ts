@@ -1,6 +1,5 @@
-import { SoundcloudCredentials } from "@/models";
-import { Soundcloud } from "@/soundcloud";
 import { createWriteStream } from "fs";
+import { Soundcloud, SoundcloudCredentials } from "soundts";
 import { pipeline } from "stream/promises";
 
 async function bootstrap() {

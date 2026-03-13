@@ -1,5 +1,4 @@
-import { SoundcloudCredentials } from "@/models";
-import { Soundcloud } from "@/soundcloud";
+import { Soundcloud, SoundcloudCredentials } from "soundts";
 
 async function bootstrap() {
   const sc = new Soundcloud({

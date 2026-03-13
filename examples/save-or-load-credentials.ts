@@ -1,6 +1,5 @@
-import { SoundcloudCredentials } from "@/models";
-import { Soundcloud } from "@/soundcloud";
 import { createReadStream } from "fs";
+import { Soundcloud, SoundcloudCredentials } from "soundts";
 
 async function bootstrap() {
   const sc = new Soundcloud({
