@@ -17,10 +17,5 @@ async function bootstrap() {
 
   const output = createWriteStream("6000000000себя.mp3");
   await pipeline(trackStream, output);
-
-  await sc.tracks.download(
-    "soundcloud:tracks:441699126",
-    "не6000000000себя.mp3",
-  );
 }
 bootstrap();
