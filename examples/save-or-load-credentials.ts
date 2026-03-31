@@ -12,11 +12,10 @@ async function bootstrap() {
   await sc.signIn();
   console.log(sc.credentials);
 
-  await sc.credentials.dump("soundcloud.auth");
+  const credentialsDump = sc.credentials.dump();
 
   try {
-    const credentialsStream = createReadStream("soundcloud.auth");
-    const credentials = SoundcloudCredentials.load(credentialsStream);
+    const credentials = SoundcloudCredentials.load(credentialsDump);
 
     console.log(credentials);
   } catch (error) {

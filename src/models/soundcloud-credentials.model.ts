@@ -1,8 +1,3 @@
-import { createWriteStream } from "fs";
-import path from "path";
-import { Readable, Writable } from "stream";
-import { text } from "stream/consumers";
-import { pipeline } from "stream/promises";
 import { SoundcloudCredentialsError } from "../error";
 import type {
   SoundcloudCredentialsDump,
@@ -84,12 +79,28 @@ export class SoundcloudCredentials {
   }
 
   /**
+   * Dumps the credentials to a JSON string
+   * @returns {SoundcloudCredentialsDump} JSON dump of SoundCloudCredentials
+   */
+  dump() {
+    const dump: SoundcloudCredentialsDump = {
+      client_id: this.clientId,
+      client_secret: this.clientSecret,
+      refresh_token: this.refreshToken,
+      access_token: this.accessToken,
+      access_token_expiration: this.accessTokenExpiration?.getTime(),
+    };
+
+    return JSON.stringify(dump);
+  }
+
+  /**
    * Loads SoundcloudCredentials from a JSON dump
    * @param dump source of the dump. Can be a JSON string or a readable stream (e.g. file)
    * @returns SoundcloudCredentials from the dump
    */
-  static async load(dump: string | Readable): Promise<SoundcloudCredentials> {
-    const options = await SoundcloudCredentials.loadDumpFromStreamOrText(dump);
+  static async load(dump: string): Promise<SoundcloudCredentials> {
+    const options = JSON.parse(dump) as SoundcloudCredentialsDump;
     SoundcloudCredentials.validateRequiredFields(options);
 
     return new SoundcloudCredentials({
@@ -99,15 +110,6 @@ export class SoundcloudCredentials {
       accessToken: options.access_token,
       accessTokenExpiration: options.access_token_expiration,
     });
-  }
-
-  private static async loadDumpFromStreamOrText(source: string | Readable) {
-    if (source instanceof String) {
-      return JSON.parse(source as string) as SoundcloudCredentialsDump;
-    } else {
-      const rawJson = await text(source as Readable);
-      return JSON.parse(rawJson) as SoundcloudCredentialsDump;
-    }
   }
 
   private static validateRequiredFields(options: object) {
@@ -121,49 +123,5 @@ export class SoundcloudCredentials {
   private static requiredFieldsProvided(json: object) {
     const keys = Object.keys(json);
     return keys.includes("client_id") && keys.includes("client_secret");
-  }
-
-  /**
-   * Dumps current SoundcloudCredentials to writable stream or file
-   * @param destination Either writable stream or string.
-   * The string is considered as a path to the file where the dump will be written to
-   */
-  async dump(destination: Writable | string): Promise<void>;
-
-  /**
-   * Dumps current SoundcloudCredentials and returns JSON string
-   */
-  dump(destination?: undefined): Promise<string>;
-
-  async dump(destination?: Writable | string): Promise<void | string> {
-    const dump: SoundcloudCredentialsDump = {
-      client_id: this.clientId,
-      client_secret: this.clientSecret,
-      refresh_token: this._refreshToken,
-      access_token: this._accessToken,
-      access_token_expiration: this._accessTokenExpiration?.getTime(),
-    };
-
-    const json = JSON.stringify(dump);
-
-    if (destination) {
-      await this.dumpToStreamOrFile(json, destination);
-    } else {
-      return json;
-    }
-  }
-
-  private async dumpToStreamOrFile(
-    json: string,
-    destination: Writable | string,
-  ) {
-    const dumpStream = Readable.from([json]);
-
-    if (destination instanceof Writable) {
-      await pipeline(dumpStream, destination);
-    } else {
-      const filePath = path.resolve(destination);
-      await pipeline(dumpStream, createWriteStream(filePath));
-    }
   }
 }

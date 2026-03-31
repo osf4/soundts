@@ -1,7 +1,3 @@
-import { createWriteStream, WriteStream } from "fs";
-import path from "path";
-import { Readable } from "stream";
-import { pipeline } from "stream/promises";
 import config from "../config";
 import { ApiUrl } from "../models";
 import { BaseModule } from "../modules/base.module";
@@ -139,24 +135,6 @@ export class TrackModule extends BaseModule {
       paginatorId: `Paginator get_track_related: ${urn}`,
       params,
     });
-  }
-
-  async download(urn: string, destination: WriteStream | string) {
-    this.logger?.info({
-      message: "Download track",
-      urn,
-      destination: destination instanceof String ? destination : "stream",
-    });
-
-    const stream = await this.stream(urn, "http_mp3_128_url");
-    const readable = Readable.fromWeb(stream);
-
-    if (destination instanceof WriteStream) {
-      await pipeline(readable, destination);
-    } else {
-      const filePath = path.resolve(destination);
-      await pipeline(readable, createWriteStream(filePath));
-    }
   }
 
   async stream(urn: string, streamType: keyof TrackLinks) {
