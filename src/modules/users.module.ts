@@ -127,7 +127,7 @@ export class UserModule extends BaseModule {
       urn,
     });
 
-    return await this.baseGetCollection<PlaylistSchema>({
+    return await this.baseGetCollection<TrackSchema>({
       url: `users/${urn}/tracks`,
       paginatorId: `Paginator get_user_tracks: ${urn}`,
       addLinkedPartitioning: true,
