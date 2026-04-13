@@ -32,7 +32,7 @@ export class Paginator<T> implements AsyncIterable<T[]> {
   public readonly logger?: BaseLogger;
 
   /**
-   * Provides logging of SoundCloud API requests
+   * Provides automatic authorization and refreshing the credentials
    */
   private readonly fetcher: ApiFetcher;
 

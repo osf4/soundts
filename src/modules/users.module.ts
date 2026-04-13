@@ -11,6 +11,7 @@ import type {
 } from "../types/parameters/users";
 import type {
   PlaylistSchema,
+  TrackSchema,
   UserSchema,
   WebProfileSchema,
 } from "../types/schemas";
